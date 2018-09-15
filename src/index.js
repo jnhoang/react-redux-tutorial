@@ -1,6 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// redux modules
+import { Provider } from 'react-redux'
+import store from './store'
+
+// app modules
+// import App from './App'
+import Layout from './Layout.js'
+import './index.css'
+
+ReactDOM.render(
+  <Provider store={ store }>
+    <Layout />
+  </Provider>
+  , document.getElementById('root'));
