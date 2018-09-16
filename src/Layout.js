@@ -1,41 +1,31 @@
-import React from "react"
+import React, { Component } from "react"
 import { connect } from "react-redux"
 import { bindActionCreators } from 'redux'
 
-import { fetchUser } from "./actions/userActions"
+import { fetchUser }   from "./actions/userActions"
 import { fetchTweets } from "./actions/tweetsActions"
-
-// @connect((store) => {
-//   return {
-//     user: store.user.user,
-//     userFetched: store.user.fetched,
-//     tweets: store.tweets.tweets,
-//   };
-// })
+import Users           from './components/Users'
 
 
-class Layout extends React.Component {
-  componentWillMount() {
-    this.props.dispatch(fetchUser())
-  }
+class Layout extends Component {
+
+  componentDidMount() {
+    this.props.dispatch(fetchUser());
+
+   }
 
   fetchTweets() {
     this.props.dispatch(fetchTweets())
   }
 
   render() {
-    const { user, tweets } = this.props;
+    const {user} = this.props;
 
-    if (!tweets.length) {
-      return <button onClick={this.fetchTweets.bind(this)}>load tweets</button>
-    }
-
-    const mappedTweets = tweets.map(tweet => <li key={tweet.id}>{tweet.text}</li>)
-
-    return <div>
-      <h1>{user.name}</h1>
-      <ul>{mappedTweets}</ul>
-    </div>
+    return (
+      <div>
+        <Users users={user} />
+      </div>
+    )
   }
 };
 
